@@ -1,0 +1,53 @@
+<Gem5Parameter>
+    <!--  Simpoint_To_Checkpoint=1, Checkpoint_To_Stats=2, Full_Program=3-->
+    <Instru_Mod> 1</Instru_Mod>
+    <!--  Normal=1, Nehalem=2-->
+    <Archit_Mod>1 </Archit_Mod> 
+    <Gem5_Path>~/gem5/build/X86/gem5.opt</Gem5_Path>
+    <Out_Path>./example</Out_Path>
+    <Config_Path>~/gem5/configs/example/se.py</Config_Path>
+    <L1_Cache priority="1">
+        <L1d_Size>
+            <L1d_Size1>64kb</L1d_Size1>
+            <L1d_Size2>84kb</L1d_Size2>
+            <L1d_Size3>128kb</L1d_Size3>
+            <L1d_Size5></L1d_Size5>
+        </L1d_Size>
+        <L1i_Size>
+            <L1i_Size1></L1i_Size1>
+        </L1i_Size>   
+        <L1d_Assoc>
+            <L1d_Assoc1></L1d_Assoc1>
+        </L1d_Assoc> 
+        <L1i_Assoc>
+            <L1i_Assoc1></L1i_Assoc1>
+        </L1i_Assoc> 
+    </L1_Cache>
+    <L2_Cache priority="2">
+        <L2_Size>
+            <L2_Size1></L2_Size1>
+        </L2_Size>
+        <L2_Assoc>
+            <L2_Assoc1></L2_Assoc1>
+        </L2_Assoc> 
+    </L2_Cache>
+    <L3_Cache priority="3">
+        <L3_Size>
+            <L3_Size1></L3_Size1>
+        </L3_Size>
+        <L3_Assoc>
+            <L3_Assoc1></L3_Assoc1>
+        </L3_Assoc>
+    </L3_Cache>
+    <Cacheline_Size>
+        <Size1></Size1>
+    </Cacheline_Size>
+    <!--  <simpoint file path>,<weight file path>,<interval length>,<warmup length> -->
+    <Simpoint_Option>/home/danny/CPU2000-simpoint/CPU2000/CINT/164.gzip-1.Data/t.simpoints,/home/danny/CPU2000-simpoint/CPU2000/CINT/164.gzip-1.Data/t.weights,100,100</Simpoint_Option>
+    <Restore_Simpoint_Checkpoint_Option></Restore_Simpoint_Checkpoint_Option>
+    <Checkpoint_Path></Checkpoint_Path>
+    <Restore_With_Cpu></Restore_With_Cpu>
+    <Program_Path>/home/danny/spec2000/164.gzip/run/00000002/gzip_base.gcc4-high-opt</Program_Path>
+    <Program_Option>"/home/danny/spec2000/164.gzip/run/00000002/input.program 10"</Program_Option>
+    <Input_File></Input_File>
+</Gem5Parameter>
