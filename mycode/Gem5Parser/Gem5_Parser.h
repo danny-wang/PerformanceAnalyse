@@ -21,6 +21,7 @@ enum class Config_Element : unsigned int{
 	Gem5_Path=1,
 	Out_Path,
 	Config_Path,
+	Cpu_Type,
 	L1d_Size,
 	L1i_Size,
 	L2_Size,     
@@ -31,7 +32,7 @@ enum class Config_Element : unsigned int{
 	L3_Assoc,
 	Cacheline_Size,
 	Simpoint_Option,  //  ./t.simpoints,./t.weights,100,100
-	Restore_Simpoint_Checkpoint_Option, //   -r 2 或者2
+	Restore_Simpoint_Checkpoint_Option, //   eg: 2
 	Checkpoint_Path,
 	Restore_With_Cpu,  //detailed
 	Program_Path,  //./gap_base.gcc4-high-opt
@@ -40,30 +41,16 @@ enum class Config_Element : unsigned int{
 };
 class Instruction{
 public:
+	Instruction(Instru_Mod a, Archit_Mod b):instru_mod(a),archit_mod(b){}
+	Instruction(const Instruction& a);
+	Instruction& operator=(const Instruction& rhs);
+	~Instruction()= default;
 	friend class Gem5Parser;
-	string GenerateString();
+	string GenerateString(int postfix_of_outpath);
 private:
 	Instru_Mod instru_mod;
 	Archit_Mod archit_mod;
-	string gem5_path;
-	string out_path;
-	string config_path;
-	string l1d_size;
-	string l1i_size;
-	string l2_size;
-	string l3_size;
-	string l1d_assoc;
-	string l1i_assoc;
-	string l2_assoc;
-	string l3_assoc;
-	string cacheline_size;
-	string Simpoint_Option;
-	string restore_simpoint_checkpoint_option;
-	string checkpoint_path;
-	string restore_with_cpu;
-	string program_path;
-	string program_option;
-	string input_file;
+	map<Config_Element, string> config_elements;
 
 };
 
@@ -73,15 +60,17 @@ class Gem5Parser{
  	Gem5Parser();
  	SuccessEnum ReadXml(string xml_path);//read from xml and store data to elements
  	bool CheckCombination(TiXmlDocument doc); // check the combination is legal or illegal
- 	bool GenerateAllInstruc(); 
+ 	bool GenerateAllInstruc();  //generate Instructions, store in vector<Instruction> instruc;
+ 	bool GenerateAllInstrucString();// generate all instruction strings, store in deque<string> all_instruc;
  	void PrintElementMap();
+ 	void PrintAllInstruc(); //cheak data;
  private:
  	void SearchAllChildElement(TiXmlElement* element, vector<string>& vec_of_elem, Config_Element con_ele);//vec_of_elem: store all values
  	void GetChildElement(TiXmlElement* element, vector<string>& temp, Config_Element con_ele); //for config which one have one value
  	Instru_Mod instru_mod;
 	Archit_Mod archit_mod;
  	map<Config_Element, vector<string>> elements;
- 	vector<Instruction*> instruc;
+ 	vector<Instruction> instruc;
  	deque<string> all_instruc;
 };
 

@@ -121,4 +121,8 @@ TEST(get_gem5_config, mormal){
     string path="./Gem5Parser/config.xml";
     parser.ReadXml(path);
     parser.PrintElementMap();
+    parser.GenerateAllInstruc();
+    parser.GenerateAllInstrucString();
+    //parser.PrintAllInstruc();
+
 }
