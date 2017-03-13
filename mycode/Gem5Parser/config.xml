@@ -50,7 +50,8 @@
     <Restore_Simpoint_Checkpoint_Option></Restore_Simpoint_Checkpoint_Option>
     <Checkpoint_Path></Checkpoint_Path>
     <Restore_With_Cpu></Restore_With_Cpu>
-    <Program_Path>/home/danny/spec2000/164.gzip/run/00000002/gzip_base.gcc4-high-opt</Program_Path>
-    <Program_Option>"/home/danny/spec2000/164.gzip/run/00000002/input.program 10"</Program_Option>
-    <Input_File></Input_File>
+    <Program_Path_Option>
+        <Program1>/home/danny/spec2000/164.gzip/run/00000002/gzip_base.gcc4-high-opt --options="/home/danny/spec2000/164.gzip/run/00000002/input.program 10"</Program1>
+        <Program12>123 &lt;test.input </Program12>
+    </Program_Path_Option>
 </Gem5Parameter>

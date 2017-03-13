@@ -123,6 +123,6 @@ TEST(get_gem5_config, mormal){
     parser.PrintElementMap();
     parser.GenerateAllInstruc();
     parser.GenerateAllInstrucString();
-    //parser.PrintAllInstruc();
+    parser.PrintAllInstruc();
 
 }

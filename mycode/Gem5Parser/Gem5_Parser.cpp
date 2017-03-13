@@ -57,12 +57,8 @@ string Instruction::GenerateString(int postfix_of_outpath){
 		ss<<" --checkpoint-dir="<<config_elements[Config_Element::Checkpoint_Path]<<" ";
 	if(config_elements.find(Config_Element::Restore_With_Cpu)!=config_elements.end())
 		ss<<" --restore-with-cpu="<<config_elements[Config_Element::Restore_With_Cpu]<<" ";	
-	if(config_elements.find(Config_Element::Program_Path)!=config_elements.end())
-		ss<<" -c "<<config_elements[Config_Element::Program_Path]<<" ";	 
-	if(config_elements.find(Config_Element::Program_Option)!=config_elements.end())
-		ss<<" --options="<<config_elements[Config_Element::Program_Option]<<" ";	
-	if(config_elements.find(Config_Element::Input_File)!=config_elements.end())
-		ss<<" <"<<config_elements[Config_Element::Input_File]<<" ";
+	if(config_elements.find(Config_Element::Program_Path_Option)!=config_elements.end())
+		ss<<" -c "<<config_elements[Config_Element::Program_Path_Option]<<" ";	 
 	ss<<"1>"<<config_elements[Config_Element::Out_Path]<<postfix_of_outpath<<"/run.log "<<"2>&1 &";
 	string result;
 	result=ss.str();
@@ -181,13 +177,8 @@ SuccessEnum Gem5Parser::ReadXml(string xml_path){
     GetChildElement(Restore_With_Cpu_Element, temp, Config_Element::Restore_With_Cpu);
 
     TiXmlElement* Program_Path_Element = Restore_With_Cpu_Element->NextSiblingElement();
-    GetChildElement(Program_Path_Element, temp, Config_Element::Program_Path);
+    SearchAllChildElement(Program_Path_Element, temp, Config_Element::Program_Path_Option);
 
-    TiXmlElement* Program_Option_Element = Program_Path_Element->NextSiblingElement();
-    GetChildElement(Program_Option_Element, temp, Config_Element::Program_Option);
-
-    TiXmlElement* Input_File_Element = Program_Option_Element->NextSiblingElement();
-    GetChildElement(Input_File_Element, temp, Config_Element::Input_File);
     cout<<"read xml file finish!"<<endl;
     doc.Clear();
     return SUCCESS;
@@ -246,7 +237,6 @@ bool Gem5Parser::GenerateAllInstruc(){
  	}
  	cout<<"GenerateAllInstruc() finishes"<<endl;
  	cout<<"instruc.size()="<<instruc.size()<<endl;
- 	instruc[0].GenerateString(1);
  	return true;
 }
 
@@ -256,11 +246,11 @@ bool Gem5Parser::GenerateAllInstrucString(){
 		all_instruc.push_back(i.GenerateString(index));
 		index++;
 	}
-	/**
+	
 	cout<<"GenerateAllInstrucString() finishes"<<endl;
 	for(auto i : all_instruc){
 		cout<< i<<endl;
 	}
-	**/
+	
 	return true;
 }

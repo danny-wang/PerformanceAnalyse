@@ -35,9 +35,7 @@ enum class Config_Element : unsigned int{
 	Restore_Simpoint_Checkpoint_Option, //   eg: 2
 	Checkpoint_Path,
 	Restore_With_Cpu,  //detailed
-	Program_Path,  //./gap_base.gcc4-high-opt
-	Program_Option,   //-l ./ -q -m 1M
-	Input_File,
+	Program_Path_Option,  //./gap_base.gcc4-high-opt -l ./ -q -m 1M <test.input
 };
 class Instruction{
 public:
@@ -66,7 +64,7 @@ class Gem5Parser{
  	void PrintAllInstruc(); //cheak data;
  private:
  	void SearchAllChildElement(TiXmlElement* element, vector<string>& vec_of_elem, Config_Element con_ele);//vec_of_elem: store all values
- 	void GetChildElement(TiXmlElement* element, vector<string>& temp, Config_Element con_ele); //for config which one have one value
+ 	void GetChildElement(TiXmlElement* element, vector<string>& temp, Config_Element con_ele); //for configs which only have one value
  	Instru_Mod instru_mod;
 	Archit_Mod archit_mod;
  	map<Config_Element, vector<string>> elements;
